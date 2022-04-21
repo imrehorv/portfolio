@@ -1,5 +1,5 @@
 # Portfolio
-
+This is a simple example for calling the CoinGecko REST API from Angular. 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
 
 ## Development server

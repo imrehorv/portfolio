@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { assetlist } from '../asset';
-import { cgexample } from '../coingeccoresult';
 import { PriceService } from '../price.service';
 
 @Component({
@@ -11,29 +10,29 @@ import { PriceService } from '../price.service';
 export class AssetsComponent implements OnInit {
   constructor(private priceService: PriceService) {}
   assets = assetlist;
-  example = cgexample;
-  priceresult: any;
+  currencylist = ['usd', 'huf'];
+  serviceresult: any = null;
   ngOnInit(): void {
     const ids = this.assets.map((a) => a.id).join();
-    const currencies = 'usd,huf';
-    console.log('ids:' + ids);
+    const currencies = this.currencylist.join();
+    console.log('ids:' + ids + 'currencies:' + currencies);
     this.priceService.getPrice(ids, currencies).subscribe((a) => {
-      this.priceresult = a;
-      console.log('bitcoin huf:' + this.priceresult['bitcoin']['huf']);
-      this.assets.forEach((a) => {
-        a.priceusd = this.priceresult[a.id]['usd'];
-        a.pricehuf = this.priceresult[a.id]['huf'];
-      });
+      this.serviceresult = a;
+      console.log('bitcoin huf:' + this.serviceresult['bitcoin']['huf']);
     });
   }
-  totalusd(): number {
-    return this.assets
-      .map((a) => a.quantity * a.priceusd)
-      .reduce((previousValue, currentValue) => previousValue + currentValue);
+  getPrice(assetid: string, quantity: number, currency: string) {
+    if (this.serviceresult === null) {
+      return 0;
+    }
+    return this.serviceresult[assetid][currency] * quantity;
   }
-  totalhuf(): number {
+  total(currency: string): number {
+    if (this.serviceresult === null) {
+      return 0;
+    }
     return this.assets
-      .map((a) => a.quantity * a.pricehuf)
+      .map((a) => this.getPrice(a.id, a.quantity, currency))
       .reduce((previousValue, currentValue) => previousValue + currentValue);
   }
 }

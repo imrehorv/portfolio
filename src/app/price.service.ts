@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { cgexample } from './coingeccoresult';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

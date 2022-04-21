@@ -2,23 +2,22 @@
   <tr>
     <th>Asset</th>
     <th>You own</th>
-    <th>Price (USD)</th>
-    <th>Price (HUF)</th>
+    <th *ngFor="let currency of currencylist">
+      Price ({{ currency | uppercase }})
+    </th>
   </tr>
   <tr *ngFor="let asset of assets">
     <td>{{ asset.id }}</td>
     <td>{{ asset.quantity }}</td>
-    <td class="tdnumber">
-      {{ asset.quantity * asset.priceusd | number: ".2-2" }}
-    </td>
-    <td class="tdnumber">
-      {{ asset.quantity * asset.pricehuf | number: ".0-0" }}
+    <td class="tdnumber" *ngFor="let currency of currencylist">
+      {{ getPrice(asset.id, asset.quantity, currency) | number: ".2-2" }}
     </td>
   </tr>
   <tr>
     <td>total</td>
     <td></td>
-    <td class="tdnumber">{{ totalusd() | number: ".2-2" }}</td>
-    <td class="tdnumber">{{ totalhuf() | number: ".0-0" }}</td>
+    <td class="tdnumber" *ngFor="let currency of currencylist">
+      {{ total(currency) | number: ".2-2" }}
+    </td>
   </tr>
 </table>

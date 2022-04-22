@@ -1,23 +1,8 @@
-<table>
-  <tr>
-    <th>Asset</th>
-    <th>You own</th>
-    <th *ngFor="let currency of currencylist">
-      Price ({{ currency | uppercase }})
-    </th>
-  </tr>
-  <tr *ngFor="let asset of assets">
-    <td>{{ asset.id }}</td>
-    <td>{{ asset.quantity }}</td>
-    <td class="tdnumber" *ngFor="let currency of currencylist">
-      {{ getPrice(asset.id, asset.quantity, currency) | number: ".2-2" }}
-    </td>
-  </tr>
-  <tr>
-    <td>total</td>
-    <td></td>
-    <td class="tdnumber" *ngFor="let currency of currencylist">
-      {{ total(currency) | number: ".2-2" }}
-    </td>
-  </tr>
-</table>
+<button (click)="refresh()">Refresh</button>
+<app-snapshot
+  *ngFor="let record of records"
+  [assets]="record.assetlist"
+  [currencylist]="record.currencylist"
+  [date]="record.date"
+  [serviceresult]="record.serviceresult"
+></app-snapshot>

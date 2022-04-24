@@ -14,12 +14,13 @@ export class SnapshotComponent implements OnInit {
   @Input() serviceresult: any = null;
   @Input() date: Date = new Date();
   displayedColumns: string[] = ['id', 'quantity'];
-
+  totals: number[] = [0, 0];
   constructor() {}
 
   ngOnInit(): void {
     this.currencylist.forEach((element) => {
       this.displayedColumns.push(element);
+      this.totals.push(this.total(element));
     });
   }
 

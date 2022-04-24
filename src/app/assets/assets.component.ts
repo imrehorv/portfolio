@@ -20,6 +20,10 @@ export class AssetsComponent implements OnInit {
 
   records: Record[] = [];
   ngOnInit(): void {
+    this.load();
+  }
+
+  load() {
     this.records = this.historyservice.load();
   }
 

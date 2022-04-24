@@ -13,11 +13,15 @@ export class SnapshotComponent implements OnInit {
 
   @Input() serviceresult: any = null;
   @Input() date: Date = new Date();
-  displayedColumns: string[] = ['id', 'quantity', 'weight', 'symbol'];
+  displayedColumns: string[] = ['id', 'quantity'];
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currencylist.forEach((element) => {
+      this.displayedColumns.push(element);
+    });
+  }
 
   getPrice(assetid: string, quantity: number, currency: string) {
     if (this.serviceresult === null) {

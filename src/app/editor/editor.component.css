@@ -1,6 +1,9 @@
 .tdnumber {
   text-align: right;
 }
-.padleft {
+.icon {
   padding-left: 10px;
+}
+table {
+  width: 100%;
 }

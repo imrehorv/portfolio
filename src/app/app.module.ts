@@ -13,6 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { DeletedialogComponent } from './deletedialog/deletedialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatDialogModule,
     MatTableModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,3 +1,6 @@
 .tdnumber {
   text-align: right;
 }
+table {
+  width: 100%;
+}

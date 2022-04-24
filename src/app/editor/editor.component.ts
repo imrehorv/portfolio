@@ -20,7 +20,7 @@ export class EditorComponent implements OnInit {
   });
   assets: Asset[] = [];
   label = 'Add';
-  displayedColumns: string[] = ['id', 'quantity', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'quantity', 'edit'];
   constructor(
     private assetService: AssetService,
     private formBuilder: FormBuilder,
@@ -42,6 +42,7 @@ export class EditorComponent implements OnInit {
     this.assetService.add(this.assetForm.value);
     this.assetForm.reset();
     this.load();
+    this.label = 'Add';
   }
 
   edit(id: string) {

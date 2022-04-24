@@ -1,5 +1,26 @@
 <button mat-raised-button (click)="refresh()">Refresh</button>
 <a [routerLink]="['/editor']"><button mat-raised-button>Edit assets</button></a>
+<mat-form-field class="example-chip-list" appearance="fill">
+  <mat-label>Currencies</mat-label>
+  <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip
+      *ngFor="let currency of currencylist"
+      (removed)="removeCurrency(currency)"
+    >
+      {{ currency }}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input
+      placeholder="New currency..."
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="addCurrency($event)"
+    />
+  </mat-chip-list>
+</mat-form-field>
 
 <app-snapshot
   *ngFor="let record of records"

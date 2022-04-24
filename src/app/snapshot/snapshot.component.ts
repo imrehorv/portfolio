@@ -13,6 +13,7 @@ export class SnapshotComponent implements OnInit {
 
   @Input() serviceresult: any = null;
   @Input() date: Date = new Date();
+  displayedColumns: string[] = ['id', 'quantity', 'weight', 'symbol'];
 
   constructor() {}
 

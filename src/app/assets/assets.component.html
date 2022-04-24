@@ -1,4 +1,6 @@
 <button (click)="refresh()">Refresh</button>
+<a [routerLink]="['/editor']"><button>Edit assets</button></a>
+
 <app-snapshot
   *ngFor="let record of records"
   [assets]="record.assetlist"

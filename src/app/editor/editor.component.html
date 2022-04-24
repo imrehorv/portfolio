@@ -1,0 +1,64 @@
+<h1 *ngIf="assets.length > 0">Assets</h1>
+<table *ngIf="assets.length > 0" mat-table [dataSource]="assets">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Asset</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef>You own</th>
+    <td mat-cell *matCellDef="let element" class="tdnumber">
+      {{ element.quantity }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="edit"
+        (click)="edit(element.id)"
+        class="padleft"
+        >edit</mat-icon
+      >
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="edit"
+        class="padleft"
+        (click)="delete(element.id)"
+        >delete</mat-icon
+      >
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+  <tr>
+    <th>Asset</th>
+    <th>Quantity</th>
+  </tr>
+  <tr *ngFor="let asset of assets">
+    <td>{{ asset.id }}</td>
+    <td class="tdnumber">{{ asset.quantity }}</td>
+  </tr>
+</table>
+<form [formGroup]="assetForm" (ngSubmit)="onSubmit()">
+  <table>
+    <tr>
+      <td>Asset (e.g. bitcoin, ethereum, cardano, ...)</td>
+      <td><input id="asset" type="text" formControlName="id" /></td>
+    </tr>
+    <tr>
+      <td>Quantity</td>
+      <td><input id="quantity" type="number" formControlName="quantity" /></td>
+    </tr>
+  </table>
+  <button type="submit">{{ label }} asset</button>
+  <button (click)="deleteAll()">Delete all</button>
+  <a [routerLink]="['/']"><button>Go back</button></a>
+</form>

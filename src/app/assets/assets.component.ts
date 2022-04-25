@@ -75,8 +75,21 @@ export class AssetsComponent implements OnInit {
     if (value && value.length < 4) {
       const index = this.currencylist.indexOf(value);
       if (index < 0) {
-        this.currencylist.push(value.toUpperCase());
-        this.currencyService.save(this.currencylist);
+        this.priceService
+          .getPrice('bitcoin', value.toLowerCase())
+          .subscribe((a) => {
+            console.log('result:' + JSON.stringify(a));
+            if (
+              a !== undefined &&
+              a['bitcoin'] !== undefined &&
+              a['bitcoin'][value.toLowerCase()] !== undefined
+            ) {
+              this.currencylist.push(value.toUpperCase());
+              this.currencyService.save(this.currencylist);
+            } else {
+              alert(value + ' is not a valid currency');
+            }
+          });
       }
     }
 

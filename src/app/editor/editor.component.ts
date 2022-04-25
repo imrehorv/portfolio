@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Asset } from '../asset';
 import { AssetService } from '../asset.service';
 import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
+import { PriceService } from '../price.service';
 
 @Component({
   selector: 'app-editor',
@@ -24,7 +25,8 @@ export class EditorComponent implements OnInit {
   constructor(
     private assetService: AssetService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private priceService: PriceService
   ) {
     this.load();
   }
@@ -39,10 +41,19 @@ export class EditorComponent implements OnInit {
     if (!this.assetForm.valid) {
       return;
     }
-    this.assetService.add(this.assetForm.value);
-    this.assetForm.reset();
-    this.load();
-    this.label = 'Add';
+    let assetvalue = this.assetForm.get('id')?.value;
+
+    this.priceService.getPrice(assetvalue, 'usd').subscribe((a) => {
+      console.log('result:' + JSON.stringify(a));
+      if (a !== undefined && a[assetvalue] !== undefined) {
+        this.assetService.add(this.assetForm.value);
+        this.assetForm.reset();
+        this.load();
+        this.label = 'Add';
+      } else {
+        alert(assetvalue + ' is not a valid assetname');
+      }
+    });
   }
 
   edit(id: string) {

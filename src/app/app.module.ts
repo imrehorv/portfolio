@@ -6,7 +6,7 @@ import { AssetsComponent } from './assets/assets.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SnapshotComponent } from './snapshot/snapshot.component';
 import { EditorComponent } from './editor/editor.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,9 @@ import { MatChipsModule } from '@angular/material/chips';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
+    FormsModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: AssetsComponent },
       { path: 'editor', component: EditorComponent },
@@ -42,6 +47,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
+    MatCheckboxModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

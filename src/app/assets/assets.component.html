@@ -1,31 +1,59 @@
-<button mat-raised-button (click)="refresh()">Refresh</button>
-<a [routerLink]="['/editor']"><button mat-raised-button>Edit assets</button></a>
-<mat-form-field class="example-chip-list" appearance="fill">
-  <mat-label>Currencies</mat-label>
-  <mat-chip-list #chipList aria-label="Fruit selection">
-    <mat-chip
-      *ngFor="let currency of currencylist"
-      (removed)="removeCurrency(currency)"
-    >
-      {{ currency }}
-      <button matChipRemove>
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </mat-chip>
-    <input
-      placeholder="New currency..."
-      [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      [matChipInputAddOnBlur]="addOnBlur"
-      (matChipInputTokenEnd)="addCurrency($event)"
-    />
-  </mat-chip-list>
-</mat-form-field>
+<mat-grid-list cols="4" rowHeight="70px">
+  <mat-grid-tile colspan="4" rowspan="1">
+    <mat-form-field class="example-chip-list" appearance="fill">
+      <mat-label>Currencies</mat-label>
+      <mat-chip-list #chipList aria-label="Currency selection">
+        <mat-chip
+          *ngFor="let currency of currencylist"
+          (removed)="removeCurrency(currency)"
+        >
+          {{ currency }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          placeholder="New currency..."
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="addCurrency($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+  </mat-grid-tile>
 
-<app-snapshot
-  *ngFor="let record of records"
-  [assets]="record.assetlist"
-  [currencylist]="record.currencylist"
-  [date]="record.date"
-  [serviceresult]="record.serviceresult"
-></app-snapshot>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <button mat-raised-button (click)="refresh()" class="matelem">
+      Refresh
+    </button>
+    <a [routerLink]="['/editor']" class="matelem"
+      ><button mat-raised-button>Edit assets</button></a
+    >
+    <mat-checkbox [(ngModel)]="showhistory" class="matelem"
+      >show history</mat-checkbox
+    >
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1"> </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1"> </mat-grid-tile>
+</mat-grid-list>
+
+<div *ngIf="showhistory">
+  <app-snapshot
+    *ngFor="let record of records"
+    [assets]="record.assetlist"
+    [currencylist]="record.currencylist"
+    [date]="record.date"
+    [serviceresult]="record.serviceresult"
+  ></app-snapshot>
+</div>
+
+<div *ngIf="!showhistory; and: getRecord0() !== null">
+  <app-snapshot
+    *ngFor="let record of getRecord0()"
+    [assets]="record.assetlist"
+    [currencylist]="record.currencylist"
+    [date]="record.date"
+    [serviceresult]="record.serviceresult"
+  ></app-snapshot>
+</div>

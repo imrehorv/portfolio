@@ -26,6 +26,7 @@ export class AssetsComponent implements OnInit {
   records: Record[] = [];
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  showhistory = false;
   ngOnInit(): void {
     this.load();
   }
@@ -54,6 +55,14 @@ export class AssetsComponent implements OnInit {
       this.savePriceServiceResult(a);
       this.load();
     });
+  }
+
+  getRecord0() {
+    if (this.records.length > 0) {
+      return this.records.slice(0, 1);
+    } else {
+      return null;
+    }
   }
 
   savePriceServiceResult(serviceresult: any) {
